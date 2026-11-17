@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BYTE | Computer Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Geist:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Lato:wght@400;700;900&family=Lexend:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&family=Open+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="loader" id="loader" aria-hidden="true">
+ <div class="loader-inner">
+  <div class="logo" role="img" aria-label="BYTE pixel mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 5h9v9H5zM18 5h9v9h-9zM5 18h9v9H5z" fill="currentColor"/><path d="M18 18h9v9h-9z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M14 9.5h4M9.5 14v4M22.5 14v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+  <div class="brand-tag">Computer Science Practice</div>
+  <div class="loader-brand">BYTE</div>
+  <div class="loader-bar"><span></span></div>
+  <div class="loader-status" id="loaderStatus">Preparing your practice space…</div>
+ </div>
+</div>
+<a class="skip-link" href="#mainContent">Skip to content</a>
+<canvas id="stars" aria-hidden="true"></canvas>
+<canvas id="trail" aria-hidden="true"></canvas>
+<div id="cosmos" aria-hidden="true">
+ <button class="celestial" tabindex="-1" title="Moon · Avg 238,855 miles away" style="left:2.5vw;top:26vh;--d:15px"><span class="orb"></span></button>
+ <button class="celestial" tabindex="-1" title="Venus · Avg 26 million miles away" style="right:3vw;top:18vh;--d:19px"><span class="orb"></span></button>
+ <button class="celestial" tabindex="-1" title="Mercury · Avg 57 million miles away" style="right:6vw;top:62vh;--d:12px"><span class="orb"></span></button>
+ <button class="celestial" tabindex="-1" title="Mars · Avg 141 million miles away" style="left:4vw;bottom:24vh;--d:16px"><span class="orb"></span></button>
+ <button class="celestial" tabindex="-1" title="Jupiter · Avg 484 million miles away" style="right:2vw;bottom:12vh;--d:23px"><span class="orb"></span></button>
+ <button class="celestial" tabindex="-1" title="Saturn · Avg 886 million miles away" style="left:7vw;top:64vh;--d:20px"><span class="orb"></span></button>
+ <button class="celestial" tabindex="-1" title="Neptune · Avg 2.80 billion miles away" style="left:1.5vw;top:44vh;--d:14px"><span class="orb"></span></button>
+</div>
+<div class="app">
+<header class="topbar">
+ <div class="brand"><div class="logo" aria-label="BYTE pixel mark" role="img"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 5h9v9H5zM18 5h9v9h-9zM5 18h9v9H5z" fill="currentColor"/><path d="M18 18h9v9h-9z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M14 9.5h4M9.5 14v4M22.5 14v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div><div class="brand-name">BYTE</div><small>COMPUTER SCIENCE PRACTICE</small></div></div>
+ <div class="top-actions"><input class="searchbox" id="siteSearch" type="search" placeholder="Search BYTE… ( / )" aria-label="Search BYTE" onkeydown="if(event.key==='Enter')runSearch()"><span class="pill" id="levelPill">YEAR 7–11</span><button class="btn" onclick="showView('progress')">My progress</button></div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+ <div class="navgroup"><div class="navlabel">LEARN</div>
+  <button class="navbtn active" data-view="home" onclick="showView('home')"><span class="ico">⌂</span>Home</button>
+  <button class="navbtn" data-view="topics" onclick="showView('topics')"><span class="ico">▦</span>Topics</button>
+  <button class="navbtn" data-view="revision" onclick="showView('revision')"><span class="ico">≡</span>Revision guide</button>
+  <button class="navbtn" data-view="python" onclick="showView('python')"><span class="ico">⌘</span>Python lab</button>
+  <button class="navbtn" data-view="flashcards" onclick="showView('flashcards')"><span class="ico">▤</span>Flashcards</button>
+  <button class="navbtn" data-view="formula" onclick="showView('formula')"><span class="ico">∑</span>Formula sheet</button>
+ </div>
+ <div class="navgroup"><div class="navlabel">PLAY</div>
+  <button class="navbtn" data-view="games" onclick="showView('games')"><span class="ico">✧</span>Games</button>
+  <button class="navbtn side-gold" data-view="tycoon" onclick="showView('tycoon')"><span class="ico">◆</span>Byte Tycoon</button>
+  <button class="navbtn" data-view="exam" onclick="showView('exam')"><span class="ico">▣</span>Exam mode</button>
+  <button class="navbtn" data-view="daily" onclick="showView('daily')"><span class="ico">◷</span>Daily challenge</button>
+  <button class="navbtn" data-view="tools" onclick="showView('tools')"><span class="ico">⌘</span>Interactive tools</button>
+  <button class="navbtn" data-view="progress" onclick="showView('progress')"><span class="ico">◷</span>Progress</button>
+  <button class="navbtn" data-view="mistakes" onclick="showView('mistakes')"><span class="ico">!</span>Mistakes notebook</button>
+  <button class="navbtn" data-view="bookmarks" onclick="showView('bookmarks')"><span class="ico">☆</span>Bookmarks</button>
+ </div>
+ <div class="navgroup"><div class="navlabel">YOUR DATA</div>
+  <button class="navbtn" data-view="saves" onclick="showView('saves')"><span class="ico">⇅</span>Save / load</button>
+  <button class="navbtn" data-view="settings" onclick="showView('settings')"><span class="ico">⚙</span>Settings</button>
+  <button class="navbtn" data-view="about" onclick="showView('about')"><span class="ico">ⓘ</span>About</button>
+ </div>
+</aside>
+<main id="mainContent">
+<section class="view active" id="home">
+ <div class="panel hero">
+  <div class="eyebrow">Your computer science practice space</div>
+  <h1>Learn it.<br>Break it. Build it.</h1>
+  <p>Practise binary, hexadecimal and Python with short questions, coding challenges and games. Start at your level and work your way up.</p>
+  <div class="hero-actions"><button class="btn primary" onclick="showView('topics')">Start learning →</button><button class="btn" onclick="showView('games')">Play a game</button></div>
+ </div>
+ <div class="stats">
+  <div class="panel stat"><strong id="statAnswered">0</strong><span>Questions answered</span></div>
+  <div class="panel stat"><strong id="statCorrect">0%</strong><span>Accuracy</span></div>
+  <div class="panel stat"><strong id="statStreak">0</strong><span>Best streak</span></div>
+  <div class="panel stat"><strong id="statPoints">0</strong><span>Points earned</span></div>
+ </div>
+ <div class="section-head"><div><div class="eyebrow">Your learning dashboard</div><h2>What to work on next</h2></div><button class="btn" onclick="showView('exam')">Take a mock exam →</button></div>
+ <div class="feature-grid"><div class="panel feature-card"><h3 id="recommendTitle">Your next step</h3><p id="recommendText">Complete a few questions to get a recommendation.</p><button class="btn primary" id="recommendBtn" onclick="showView('topics')">Choose a topic →</button></div><div class="panel feature-card"><h3>This week</h3><div class="metric-row"><div class="metric"><strong id="weekAttempts">0</strong><span>Attempts</span></div><div class="metric"><strong id="weekAccuracy">0%</strong><span>Accuracy</span></div><div class="metric"><strong id="masteredCount">0/8</strong><span>Topics mastered</span></div></div></div></div>
+ <div class="section-head"><div><div class="eyebrow">Pick up where you left off</div><h2>Explore topics</h2></div><button class="btn" onclick="showView('topics')">All topics →</button></div>
+ <div class="cards" id="homeTopics"></div>
+ <p class="smallprint">Made for practice. Year labels are suggested difficulty bands, not a fixed curriculum schedule.</p>
+</section>
+
+<section class="view" id="topics">
+ <div class="section-head"><div><div class="eyebrow">Choose what to practise</div><h2>Topics</h2><p>Each topic has 100 generated question variations at each of the three difficulty levels.</p></div></div>
+ <div class="cards" id="topicCards"></div>
+</section>
+
+<section class="view" id="revision">
+ <div class="section-head"><div><div class="eyebrow">Quick reference</div><h2>Revision guide</h2><p>Short explanations and key facts to check before a quiz. These are summaries, not a replacement for your class notes.</p></div></div>
+ <div class="cards">
+  <article class="panel setting"><h3>Binary and denary</h3><p>Binary is base 2 and uses only 0 and 1. Each position is worth twice the position to its right.</p><p><b>8-bit place values:</b> 128, 64, 32, 16, 8, 4, 2, 1.</p><p>To convert binary to denary, add the place values where there is a 1. To convert denary to binary, find which place values add up to the number.</p></article>
+  <article class="panel setting"><h3>Hexadecimal</h3><p>Hexadecimal is base 16. It uses 0–9 and A–F, where A=10, B=11, C=12, D=13, E=14 and F=15.</p><p>One hexadecimal digit represents exactly four binary bits. Split an 8-bit binary number into two groups of four to convert it.</p></article>
+  <article class="panel setting"><h3>Binary shifts</h3><p>A logical left shift moves every bit left and adds zeroes on the right. For positive unsigned values, each left shift multiplies by 2.</p><p>A logical right shift moves bits right and adds zeroes on the left. Each right shift divides by 2, discarding any remainder. Bits shifted out are lost.</p></article>
+  <article class="panel setting"><h3>Data representation</h3><p>A bit is one binary digit. 8 bits make 1 byte. Storage is commonly measured in KB, MB, GB and TB.</p><p>Images use pixels. More pixels and more bits per pixel usually mean a larger file. Sound is sampled: a higher sample rate or bit depth usually increases file size.</p><p>Text is represented using character sets such as ASCII and Unicode.</p></article>
+  <article class="panel setting"><h3>Logic gates</h3><p><b>AND</b> outputs 1 only when both inputs are 1. <b>OR</b> outputs 1 when at least one input is 1. <b>NOT</b> reverses the input.</p><p><b>XOR</b> outputs 1 when the inputs are different. A truth table lists every possible input combination and its output.</p></article>
+  <article class="panel setting"><h3>Algorithms</h3><p>An algorithm is a precise set of steps to solve a problem. Common tools include sequence, selection (if) and iteration (loops).</p><p>Linear search checks items one at a time. Binary search repeatedly halves a <b>sorted</b> list. Trace tables help track variable values as an algorithm runs.</p></article>
+  <article class="panel setting"><h3>Networks and security</h3><p>A LAN covers a small area. A WAN covers a larger area. Routers connect networks and switches connect devices on a LAN.</p><p>Protocols are agreed rules. HTTP/HTTPS are used for web pages, DNS looks up domain names, and TCP helps deliver data reliably.</p><p>Phishing tries to trick people into revealing information. Use strong unique passwords, updates and multi-factor authentication.</p></article>
+  <article class="panel setting"><h3>Python essentials</h3><p><code>=</code> assigns a value; <code>==</code> compares values. Indentation defines code blocks. Lists start at index 0.</p><p><code>if</code> makes a decision, <code>for</code> and <code>while</code> repeat code, and <code>return</code> sends a value back from a function.</p></article>
+ </div>
+ <div class="panel setting" style="margin-top:13px"><h3>How to revise effectively</h3><p>Try a short quiz without notes, read the explanation for every mistake, then retry the topic later. Practise writing out working for number conversions instead of guessing.</p><button class="btn primary" onclick="showView('topics')">Practise a topic →</button></div>
+</section>
+
+<section class="view" id="quiz">
+ <div class="quiz-head"><div><div class="eyebrow" id="quizEyebrow">PRACTICE</div><h2 id="quizTitle">Binary</h2></div><div class="select-row"><select id="difficulty" onchange="restartQuiz()"><option value="0">Beginner · Year 7–8</option><option value="1">Intermediate · Year 9–10</option><option value="2">Advanced · Year 11</option></select></div></div>
+ <div class="panel quiz-card">
+  <div class="question-meta"><span class="tag" id="qCount">Question 1 / 100</span><span class="tag" id="qDifficulty">Beginner</span><span class="tag" id="qPoints">+10 points</span></div>
+  <div class="question" id="questionText">Loading question...</div>
+  <div id="answerBox" class="answer-area"><input id="answerInput" placeholder="Type your answer..." autocomplete="off"><button class="btn primary" onclick="checkAnswer()">Check answer</button></div>
+  <div class="feedback" id="feedback"></div>
+  <div class="quiz-bottom"><span class="muted" id="quizScore">0 correct · 0 attempted</span><div><button class="btn" id="bookmarkBtn" onclick="toggleBookmark()">☆ Bookmark</button> <button class="btn" onclick="reportCurrentQuestion()">Report question</button> <button class="btn" onclick="skipQuestion()">Skip</button> <button class="btn primary" id="nextBtn" onclick="nextQuestion()" disabled>Next →</button></div></div>
+ </div>
+ <p class="smallprint">Questions are generated from templates with changing values. Some concept questions repeat, so treat this as practice rather than a formal exam. Use “Report question” if you spot a confusing or incorrect item. Reports are downloaded locally, not sent to a server.</p>
+</section>
+
+<section class="view" id="python">
+ <div class="section-head"><div><div class="eyebrow">Write, run, debug</div><h2>Python lab</h2><p>Try a challenge, edit the code, then run it in your browser.</p></div><select id="pyLevel" onchange="loadPyChallenge()"><option value="0">Beginner · Year 7–8</option><option value="1">Intermediate · Year 9–10</option><option value="2">Advanced · Year 11</option></select></div>
+ <div class="panel quiz-card">
+  <div class="question-meta"><span class="tag" id="pyNumber">Challenge 1</span><span class="tag">Python 3</span><span class="tag">Code runner</span></div>
+  <h3 id="pyTitle">Print a message</h3><p id="pyPrompt">Write a program...</p>
+  <div class="python-layout">
+   <div><textarea id="codeEditor" class="editor" spellcheck="false">print("Hello, world!")</textarea><div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn primary" onclick="runPython()">▶ Run code</button><button class="btn" onclick="resetCode()">Reset code</button><button class="btn" onclick="checkPythonChallenge()">Check challenge</button></div></div>
+   <div><div class="eyebrow" style="margin:4px 0 9px">OUTPUT</div><div class="output" id="pyOutput">Your output will appear here.</div></div>
+  </div>
+  <p class="smallprint" id="pyStatus">The first run downloads the Python runtime from Pyodide. Internet access is needed for that first load. Code runs in your browser, not on a school server. Do not enter passwords or personal information.</p>
+  <div style="display:flex;justify-content:flex-end;margin-top:12px"><button class="btn" onclick="nextPyChallenge()">Next challenge →</button></div>
+ </div>
+ <div class="section-head"><div><div class="eyebrow">Quick knowledge check</div><h2>Python questions</h2></div><button class="btn" onclick="startQuiz('python')">Open 100-question practice →</button></div>
+</section>
+
+<section class="view" id="games">
+ <div class="section-head"><div><div class="eyebrow">Learn by playing</div><h2>Games</h2><p>Answer questions to earn points. No account needed.</p></div></div>
+ <div class="game-grid">
+  <div class="panel game-card"><div class="game-icon">◈</div><h3>60-second sprint</h3><p>Answer as many mixed questions as you can before the timer runs out.</p><button class="btn primary" onclick="startGame('sprint')">Play sprint →</button></div>
+  <div class="panel game-card"><div class="game-icon">⌁</div><h3>Streak challenge</h3><p>Keep answering correctly. One wrong answer ends your run.</p><button class="btn primary" onclick="startGame('streak')">Play streak →</button></div>
+  <div class="panel game-card"><div class="game-icon">⌗</div><h3>Binary dash</h3><p>Focus on binary conversions and arithmetic.</p><button class="btn" onclick="startGame('binary')">Play binary dash →</button></div>
+  <div class="panel game-card"><div class="game-icon">⌘</div><h3>Python quickfire</h3><p>Test your understanding of Python syntax, output and logic.</p><button class="btn" onclick="startGame('python')">Play Python quickfire →</button></div>
+ </div>
+ <div id="gameArea" style="margin-top:15px"></div>
+  </section>
+
+ <section class="view" id="tycoon">
+   <div class="section-head"><div><div class="eyebrow">Answer to build your business</div><h2>Byte Tycoon</h2><p>Choose a business, answer skill-level questions to earn money, then grow your shop. Mistakes cost custom but never lose progress.</p></div></div>
+   <div class="panel quiz-card" id="tycoonSetup">
+    <h3>Start your business</h3>
+    <div class="tool-controls" style="margin:14px 0">
+     <label for="tycoonBiz">Business type</label>
+     <select id="tycoonBiz"><option value="cafe">☕ Code Café</option><option value="arcade">🕹️ Pixel Arcade</option><option value="lab">🔬 Logic Lab</option><option value="net">🌐 Network Hub</option></select>
+     <label for="tycoonSkill">Skill level</label>
+     <select id="tycoonSkill"><option value="0">Beginner · Year 7–8</option><option value="1" selected>Intermediate · Year 9–10</option><option value="2">Advanced · Year 11</option></select>
+    </div>
+    <button class="btn primary" onclick="startTycoon()">Launch business →</button>
+    <p class="smallprint">Correct answers earn <b>£10–£30</b> plus CSAT. Wrong answers cost CSAT. Higher skill levels pay more per question.</p>
+   </div>
+   <div class="panel quiz-card" id="tycoonRun" style="display:none">
+    <div class="quiz-head"><div><div class="eyebrow" id="tycoonEyebrow">BYTE TYCOON</div><h2 id="tycoonTitle">Code Café</h2></div><span class="tag" id="tycoonLevel">Beginner</span></div>
+    <div class="stats" style="margin-top:14px;grid-template-columns:repeat(4,1fr)">
+     <div class="panel stat"><strong id="tycoonMoney">£0</strong><span>Cash</span></div>
+     <div class="panel stat"><strong id="tycoonCsat">100</strong><span>CSAT</span></div>
+     <div class="panel stat"><strong id="tycoonWorkers">0</strong><span>Workers</span></div>
+     <div class="panel stat"><strong id="tycoonEarned">£0</strong><span>Total earned</span></div>
+    </div>
+    <div class="question" id="tycoonQuestion" style="margin-top:16px">Start answering to grow your business.</div>
+    <div class="answer-area"><input id="tycoonAnswer" placeholder="Type your answer..." autocomplete="off"><button class="btn primary" onclick="answerTycoon()">Submit</button></div>
+    <div class="feedback" id="tycoonFeedback"></div>
+    <div class="feature-grid" style="margin-top:16px">
+     <div class="panel setting"><h3>Hire & upgrade</h3><p>Hire workers to boost income per correct answer and CSAT.</p><div class="tool-controls"><button class="btn" onclick="buyTycoon('worker')">Hire worker · £50</button><button class="btn" onclick="buyTycoon('machine')">Buy machine · £120</button><button class="btn" onclick="buyTycoon('market')">Open market · £250</button></div></div>
+     <div class="panel setting"><h3>Your empire</h3><div class="metric-row"><div class="metric"><strong id="tycoonMachines">0</strong><span>Machines</span></div><div class="metric"><strong id="tycoonMarkets">0</strong><span>Markets</span></div><div class="metric"><strong id="tycoonIncome">£10/answer</strong><span>Income rate</span></div></div><p class="muted" style="margin-top:10px">Each worker adds <b>£8</b> per correct answer. Machines add CSAT bonus; markets unlock bigger payouts.</p></div>
+    </div>
+   </div>
+  </section>
+
+ <section class="view" id="progress">
+ <div class="section-head"><div><div class="eyebrow">Your learning</div><h2>Progress</h2><p>Your progress is stored in this browser until you export it.</p></div></div>
+ <div class="stats"><div class="panel stat"><strong id="pAnswered">0</strong><span>Attempted</span></div><div class="panel stat"><strong id="pCorrect">0</strong><span>Correct</span></div><div class="panel stat"><strong id="pPoints">0</strong><span>Points</span></div><div class="panel stat"><strong id="pAccuracy">0%</strong><span>Accuracy</span></div></div>
+ <div class="section-head"><div><h2>Topic mastery</h2><p>Mastery is reached after at least 20 attempts with 80% accuracy.</p></div></div><div class="panel setting" id="masteryBreakdown"></div><div class="section-head"><div><h2>Achievements</h2></div></div><div class="badge-grid" id="achievementGrid"></div><div class="section-head"><div><h2>Topic breakdown</h2></div></div><div class="cards" id="breakdown"></div>
+</section>
+
+<section class="view" id="exam">
+ <div class="section-head"><div><div class="eyebrow">GCSE-style practice</div><h2>Exam mode</h2><p>20 mixed questions, 20 minutes. No hints or answer reveals until you submit.</p></div></div>
+ <div class="panel quiz-card" id="examSetup"><h3>Set up your mock exam</h3><div class="tool-controls" style="margin:14px 0"><label for="examLevel">Difficulty</label><select id="examLevel"><option value="0">Beginner · Year 7–8</option><option value="1" selected>Intermediate · Year 9–10</option><option value="2">Advanced · Year 11</option><option value="mix">Mixed levels</option></select><label for="examLength">Questions</label><select id="examLength"><option value="10">10 questions</option><option value="20" selected>20 questions</option><option value="30">30 questions</option></select></div><button class="btn primary" onclick="beginExam()">Start exam →</button></div>
+ <div class="panel quiz-card" id="examRun" style="display:none"><div class="quiz-head"><div><div class="eyebrow">MOCK EXAM</div><h2 id="examCounter">Question 1</h2></div><span class="tag" id="examTimer">20:00</span></div><div class="question" id="examQuestion"></div><div id="examAnswers" class="answer-area"></div><div class="quiz-bottom"><span class="muted" id="examProgress">0 answered</span><button class="btn primary" onclick="nextExamQuestion()">Next →</button></div></div><div id="examResult"></div>
+</section>
+<section class="view" id="tools">
+ <div class="section-head"><div><div class="eyebrow">Learn by experimenting</div><h2>Interactive tools</h2><p>Change values and see how computer science concepts work.</p></div></div>
+ <div class="feature-grid">
+  <div class="panel setting"><h3>Binary converter</h3><p>Convert between denary and 8-bit binary.</p><div class="tool-controls"><input id="binaryToolInput" type="number" min="0" max="255" value="42" aria-label="Denary number"><button class="btn primary" onclick="convertBinaryTool()">Convert</button></div><div class="tool-result" id="binaryToolResult">42 = 00101010</div></div>
+  <div class="panel setting"><h3>Binary place-value trainer</h3><p>Toggle each bit and see the denary total change.</p><div id="bitToggles" class="tool-controls" style="gap:6px"></div><div class="tool-result" id="bitTotal">Binary 00000000 = 0</div></div>
+  <div class="panel setting"><h3>Logic gate builder</h3><p>Choose a gate and change its inputs.</p><div class="tool-controls"><select id="gateType" onchange="updateGateTool()"><option>AND</option><option>OR</option><option>NOT</option><option>XOR</option><option>NAND</option><option>NOR</option></select><label>A <select id="gateA" onchange="updateGateTool()"><option value="0">0</option><option value="1">1</option></select></label><label id="gateBLabel">B <select id="gateB" onchange="updateGateTool()"><option value="0">0</option><option value="1" selected>1</option></select></label></div><div class="tool-result" id="gateResult">Output: 0</div></div>
+  <div class="panel setting"><h3>Sorting visualiser</h3><p>Watch bubble sort compare and swap values.</p><div id="sortBars" class="tool-result" aria-live="polite" style="display:flex;align-items:end;gap:5px;height:150px"></div><div class="tool-controls" style="margin-top:10px"><button class="btn" onclick="resetSort()">Reset</button><button class="btn primary" onclick="sortStep()">Next step →</button><span class="muted" id="sortStatus">Ready</span></div></div>
+  <div class="panel setting"><h3>Arrange algorithm steps</h3><p>Put these linear search steps in the correct order. Use the arrows to move steps.</p><div id="algorithmOrder"></div><div class="tool-controls" style="margin-top:10px"><button class="btn primary" onclick="checkAlgorithmOrder()">Check order</button><button class="btn" onclick="resetAlgorithmOrder()">Reset</button></div><div class="tool-result" id="algorithmResult">Arrange the steps, then check your answer.</div></div>
+  <div class="panel setting"><h3>Python trace table</h3><p>Follow each line and track the variable values.</p><pre class="output">total = 0
+for n in [2, 4, 6]:
+    total += n</pre><button class="btn primary" onclick="traceStep()">Next line →</button> <button class="btn" onclick="resetTrace()">Reset</button><div class="tool-result" id="traceResult">Line 1 · total = 0</div></div>
+ </div>
+</section>
+<section class="view" id="flashcards">
+ <div class="section-head"><div><div class="eyebrow">Recall practice</div><h2>Flashcards</h2><p>Try to answer before revealing the definition. Rate how well you knew it to guide future revision.</p></div><span class="tag" id="flashcardCount">Card 1</span></div>
+ <div class="panel flashcard" id="flashcard" onclick="revealFlashcard()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();revealFlashcard()}"><div class="eyebrow">TERM</div><h2 id="flashTerm">Algorithm</h2><p class="muted">Select the card to reveal the answer</p><div class="answer" id="flashAnswer"></div></div>
+ <div class="quiz-bottom"><button class="btn" onclick="rateFlashcard('again')">Need to revise</button><button class="btn" onclick="rateFlashcard('good')">I knew it</button><button class="btn primary" onclick="nextFlashcard()">Next card →</button></div>
+ <p class="smallprint">Cards you mark for revision will appear more often. Your ratings are saved on this device.</p>
+</section>
+<section class="view" id="mistakes"><div class="section-head"><div><div class="eyebrow">Learn from errors</div><h2>Mistakes notebook</h2><p>Questions you answer incorrectly are saved here for another attempt.</p></div><button class="btn" onclick="clearMistakes()">Clear notebook</button></div><div id="mistakeList" class="cards"></div></section>
+<section class="view" id="bookmarks"><div class="section-head"><div><div class="eyebrow">Save for later</div><h2>Bookmarked questions</h2><p>Keep questions you want to revisit.</p></div><button class="btn" onclick="clearBookmarks()">Clear bookmarks</button></div><div id="bookmarkList" class="cards"></div></section>
+<section class="view" id="daily"><div class="section-head"><div><div class="eyebrow">A fresh set every day</div><h2>Daily challenge</h2><p>Answer 10 mixed questions. Your daily completion is saved locally.</p></div><span class="tag" id="dailyDate"></span></div><div class="panel quiz-card" id="dailySetup"><h3>Ready for today's challenge?</h3><p id="dailyStatus">Complete all 10 questions to finish today's challenge.</p><button class="btn primary" id="dailyStart" onclick="startDaily()">Start today's challenge →</button></div><div class="panel quiz-card" id="dailyRun" style="display:none"><div class="question-meta"><span class="tag" id="dailyCounter">Question 1 / 10</span><span class="tag" id="dailyTopic">Topic</span></div><div class="question" id="dailyQuestion"></div><div class="answer-area"><input id="dailyAnswer" placeholder="Your answer…"><button class="btn primary" onclick="answerDaily()">Check</button></div><div class="feedback" id="dailyFeedback"></div><div class="quiz-bottom"><span class="muted" id="dailyScore">0 correct</span><button class="btn" id="dailyNext" onclick="nextDaily()" disabled>Next →</button></div></div><div id="dailyResult"></div></section>
+<section class="view" id="formula"><div class="section-head"><div><div class="eyebrow">Quick reference</div><h2>Formula sheet</h2><p>Useful rules and formulas for common Computer Science calculations.</p></div></div><div class="cards">
+ <article class="panel setting"><h3>Binary and hexadecimal</h3><p><b>8-bit place values:</b> 128, 64, 32, 16, 8, 4, 2, 1.</p><p><b>Binary to denary:</b> add the place values where the bit is 1.</p><p><b>Hex to binary:</b> each hexadecimal digit represents 4 bits.</p><p><b>Binary to hex:</b> split the binary number into groups of 4 bits.</p></article>
+ <article class="panel setting"><h3>Storage units</h3><p>1 byte = 8 bits.</p><p>1 KB = 1,000 bytes (or 1,024 bytes in some contexts). Check which convention a question uses.</p><p>File size in bits = number of items × bits per item.</p></article>
+ <article class="panel setting"><h3>Image size</h3><p><b>Uncompressed image size (bits)</b> = width × height × colour depth.</p><p>Divide by 8 to convert bits to bytes.</p></article>
+ <article class="panel setting"><h3>Sound size</h3><p><b>Uncompressed sound size (bits)</b> = sample rate × duration × bit depth × number of channels.</p><p>Divide by 8 to convert bits to bytes.</p></article>
+ <article class="panel setting"><h3>Binary shifts</h3><p>Each logical left shift multiplies an unsigned value by 2, if no significant bits are lost.</p><p>Each logical right shift divides by 2 and discards remainders.</p></article>
+ <article class="panel setting"><h3>Networks</h3><p><b>Download time</b> = file size (bits) ÷ connection speed (bits per second).</p><p>Remember to convert bytes to bits before using a speed measured in bits per second.</p></article>
+ </div></section>
+<section class="view" id="saves">
+ <div class="section-head"><div><div class="eyebrow">Take your progress with you</div><h2>Save / load</h2><p>Export a backup file or import one on another computer.</p></div></div>
+ <div class="settings-grid">
+  <div class="panel setting"><div class="game-icon">⇩</div><h3>Export progress</h3><p>Download your progress as a <code>.bytesave</code> file. Keep it somewhere safe.</p><button class="btn primary" onclick="exportSave()">Export save file</button></div>
+  <div class="panel setting"><div class="game-icon">⇧</div><h3>Import progress</h3><p>Choose a previous <code>.bytesave</code> file to restore your progress in this browser.</p><input type="file" id="saveFile" accept=".bytesave,.json,application/json" style="width:100%;margin:8px 0"><button class="btn" onclick="importSave()">Import save file</button></div>
+ </div>
+ <div class="panel setting" style="margin-top:13px"><h3>About save files</h3><p>These files are currently plain JSON with a file extension. They are designed for portability, not encryption or anti-cheating. Anyone with the file can inspect or edit it. Do not put personal information in a save file.</p><button class="btn" onclick="resetProgress()">Reset all local progress</button></div>
+</section>
+
+<section class="view" id="settings">
+ <div class="section-head"><div><div class="eyebrow">Make BYTE easier to use</div><h2>Accessibility settings</h2><p>Change the appearance and reading experience. Your choices are saved on this device and can be changed at any time.</p></div></div>
+ <div class="settings-grid">
+  <div class="panel setting-section"><h3>Text and reading</h3><p class="smallprint">Adjust how text appears across the website.</p>
+   <div class="setting-control"><div><label for="textSize">Text size</label><p>Choose standard, large or extra large text.</p></div><select id="textSize" onchange="updateSetting('textSize',this.value)"><option value="normal">Standard</option><option value="large">Large</option><option value="extra">Extra large</option></select></div>
+   <div class="setting-control"><div><label for="fontFamily">Website font</label><p>Choose from clean, rounded, accessible, serif and coding fonts. Some fonts load from Google Fonts when online.</p></div><select id="fontFamily" onchange="updateSetting('fontFamily',this.value)"><option value="inter">Inter</option><option value="geist">Geist</option><option value="roboto">Roboto</option><option value="open-sans">Open Sans</option><option value="lato">Lato</option><option value="poppins">Poppins</option><option value="montserrat">Montserrat</option><option value="nunito">Nunito</option><option value="lexend">Lexend</option><option value="atkinson">Atkinson Hyperlegible</option><option value="arial">Arial</option><option value="verdana">Verdana</option><option value="georgia">Georgia</option><option value="mono">JetBrains Mono</option><option value="system">System default</option></select></div>
+   <div class="setting-control"><div><label for="dyslexiaFont">Dyslexia-friendly spacing</label><p>Uses a clear sans-serif font with more letter and word spacing. This is not a specialist dyslexia font.</p></div><input id="dyslexiaFont" type="checkbox" onchange="updateSetting('dyslexiaFont',this.checked)"></div>
+   <div class="setting-control"><div><label for="wideSpacing">Increased line spacing</label><p>Adds more space between lines to make paragraphs easier to follow.</p></div><input id="wideSpacing" type="checkbox" onchange="updateSetting('wideSpacing',this.checked)"></div>
+   <div class="setting-control"><div><label for="readableWidth">Narrow reading width</label><p>Limits the width of the main content to reduce long lines.</p></div><input id="readableWidth" type="checkbox" onchange="updateSetting('readableWidth',this.checked)"></div>
+  </div>
+  <div class="panel setting-section"><h3>Colour and contrast</h3><p class="smallprint">Pick the display that is most comfortable for you.</p>
+   <div class="setting-control"><div><label for="colourMode">Colour mode</label><p>Choose the default dark theme, a light theme or high contrast.</p></div><select id="colourMode" onchange="updateSetting('colourMode',this.value)"><option value="dark">Dark</option><option value="light">Light</option><option value="contrast">High contrast</option></select></div>
+   <div class="setting-control"><div><label for="underlineLinks">Underline links</label><p>Makes links easier to distinguish without relying on colour.</p></div><input id="underlineLinks" type="checkbox" onchange="updateSetting('underlineLinks',this.checked)"></div>
+   <div class="setting-control"><div><label for="highlightFocus">Strong keyboard focus</label><p>Shows a bright outline around the item currently selected with the keyboard.</p></div><input id="highlightFocus" type="checkbox" onchange="updateSetting('highlightFocus',this.checked)"></div>
+  </div>
+  <div class="panel setting-section"><h3>Movement and visual effects</h3><p class="smallprint">Turn off effects that may be distracting.</p>
+   <div class="setting-control"><div><label for="noMotion">Reduce motion</label><p>Disables click ripples and transitions. Also respects your device's reduced-motion preference.</p></div><input id="noMotion" type="checkbox" onchange="updateSetting('noMotion',this.checked)"></div>
+   <div class="setting-control"><div><label for="noBackground">Hide constellation background</label><p>Removes the decorative background to reduce visual distraction.</p></div><input id="noBackground" type="checkbox" onchange="updateSetting('noBackground',this.checked)"></div>
+   <div class="setting-control"><div><label for="bigCursor">Larger pointer</label><p>Uses a larger pointer for links and controls where supported by your browser.</p></div><input id="bigCursor" type="checkbox" onchange="updateSetting('bigCursor',this.checked)"></div>
+  </div>
+  <div class="panel setting-section"><h3>Keyboard and help</h3><p>BYTE supports keyboard navigation. Use <b>Tab</b> to move forward, <b>Shift + Tab</b> to move back, and <b>Enter</b> or <b>Space</b> to activate buttons and controls. Use the “Skip to content” link at the top of the page to jump past navigation.</p><p class="smallprint">Some accessibility options depend on your browser and operating system. You can also use built-in tools such as Windows Magnifier, Narrator, colour filters and browser zoom.</p>
+   <div class="settings-actions"><button class="btn" onclick="resetSettings()">Reset accessibility settings</button><button class="btn primary" onclick="showView('home')">Back to BYTE</button></div>
+  </div>
+ </div>
+ <p class="smallprint">Settings are stored locally in this browser. They do not change your progress or get included in your exported save file.</p>
+</section>
+
+<section class="view" id="about">
+ <div class="panel hero"><div class="eyebrow">About BYTE</div><h1>Computer science,<br>made clearer.</h1><p>Practice material is organised into three suggested bands: Year 7–8, Year 9–10 and Year 11. Schools teach topics in different orders, so use the levels as a guide rather than a promise of exactly what you have covered.</p><p>BYTE was created for students at <strong>Priestlands School</strong>, giving them a place to practise computer science concepts at their own pace. It is an independent learning tool rather than an official Priestlands School website, and it is available to all students in Years 7–11.</p></div>
+ <div class="panel setting" style="margin-top:14px"><h3>Curriculum approach</h3><p>The revision material also introduces data representation, logic gates, algorithms, networks and cybersecurity. The exact depth and order vary by school and exam board. Use the revision guide alongside your teacher’s resources.</p><p class="smallprint">References: <a href="https://www.gov.uk/government/publications/national-curriculum-in-england-computing-programmes-of-study/national-curriculum-in-england-computing-programmes-of-study" target="_blank" rel="noopener">Department for Education: Computing programmes of study</a> · <a href="https://www.gov.uk/government/publications/gcse-computer-science/gcse-subject-content-for-computer-science" target="_blank" rel="noopener">GCSE Computer Science subject content</a> · <a href="https://www.aqa.org.uk/subjects/computer-science/gcse/computer-science-8525/specification/subject-content/fundamentals-of-data-representation" target="_blank" rel="noopener">AQA data representation</a>.</p></div>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+ <div class="footer-brand"><span class="footer-mark" aria-hidden="true"><svg viewBox="0 0 32 32" width="19" height="19"><path d="M5 5h9v9H5zM18 5h9v9h-9zM5 18h9v9H5z" fill="currentColor"/><path d="M18 18h9v9h-9z" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></span><span><strong>BYTE</strong><small>Computer Science Practice</small></span></div>
+ <p>Available to all students in <strong>Years 7–11</strong>.</p>
+ <p class="footer-credit">Created by <strong>Dane Bellamy</strong></p>
+</footer>
+</div>
+<div class="toast" id="toast"></div>
+    <script src="script.js"></script>
+</body></html>
