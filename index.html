@@ -57,10 +57,10 @@
   <button class="navbtn" data-view="bookmarks" onclick="showView('bookmarks')"><span class="ico">☆</span>Bookmarks</button>
  </div>
  <div class="navgroup"><div class="navlabel">YOUR DATA</div>
-  <button class="navbtn" data-view="saves" onclick="showView('saves')"><span class="ico">⇅</span>Save / load</button>
-  <button class="navbtn" data-view="settings" onclick="showView('settings')"><span class="ico">⚙</span>Settings</button>
-  <button class="navbtn" data-view="about" onclick="showView('about')"><span class="ico">ⓘ</span>About</button>
- </div>
+    <button class="navbtn" data-view="saves" onclick="showView('saves')"><span class="ico">⇅</span>Save / load</button>
+    <button class="navbtn" data-view="settings" onclick="showView('settings')"><span class="ico">⚙</span>Settings</button>
+    <button class="navbtn" data-view="about" onclick="showView('about')"><span class="ico">ⓘ</span>About</button>
+   </div>
 </aside>
 <main id="mainContent">
 <section class="view active" id="home">
@@ -152,8 +152,9 @@
      <select id="tycoonSkill"><option value="0">Beginner · Year 7–8</option><option value="1" selected>Intermediate · Year 9–10</option><option value="2">Advanced · Year 11</option></select>
     </div>
     <button class="btn primary" onclick="startTycoon()">Launch business →</button>
-    <p class="smallprint">Correct answers earn <b>£10–£30</b> plus CSAT. Wrong answers cost CSAT. Higher skill levels pay more per question.</p>
-   </div>
+         <p class="smallprint">Correct answers earn <b>£10–£30</b> plus CSAT. Wrong answers cost CSAT. Higher skill levels pay more per question.</p>
+         <div class="panel setting" style="margin-top:13px"><h3>What is CSAT?</h3><p><b>CSAT</b> stands for <b>Customer Satisfaction</b>. It starts at <b>100</b> out of 100. Getting an answer right <b>raises</b> CSAT; getting one wrong <b>lowers</b> it. Keep CSAT high to unlock markets (<b>60+</b>) and keep customers coming back — if it ever reaches 0, your customers stop visiting until you answer correctly again. Nothing you earn is ever lost.</p></div>
+        </div>
    <div class="panel quiz-card" id="tycoonRun" style="display:none">
     <div class="quiz-head"><div><div class="eyebrow" id="tycoonEyebrow">BYTE TYCOON</div><h2 id="tycoonTitle">Code Café</h2></div><span class="tag" id="tycoonLevel">Beginner</span></div>
     <div class="stats" style="margin-top:14px;grid-template-columns:repeat(4,1fr)">
@@ -163,6 +164,7 @@
      <div class="panel stat"><strong id="tycoonEarned">£0</strong><span>Total earned</span></div>
     </div>
     <div class="question" id="tycoonQuestion" style="margin-top:16px">Start answering to grow your business.</div>
+     <p class="smallprint" style="margin-top:6px"><b>CSAT</b> (customer satisfaction, out of 100) rises when you're correct and falls when you're wrong. Markets need <b>60+</b>.</p>
     <div class="answer-area"><input id="tycoonAnswer" placeholder="Type your answer..." autocomplete="off"><button class="btn primary" onclick="answerTycoon()">Submit</button></div>
     <div class="feedback" id="tycoonFeedback"></div>
     <div class="feature-grid" style="margin-top:16px">
@@ -175,11 +177,15 @@
  <section class="view" id="progress">
  <div class="section-head"><div><div class="eyebrow">Your learning</div><h2>Progress</h2><p>Your progress is stored in this browser until you export it.</p></div></div>
  <div class="stats"><div class="panel stat"><strong id="pAnswered">0</strong><span>Attempted</span></div><div class="panel stat"><strong id="pCorrect">0</strong><span>Correct</span></div><div class="panel stat"><strong id="pPoints">0</strong><span>Points</span></div><div class="panel stat"><strong id="pAccuracy">0%</strong><span>Accuracy</span></div></div>
- <div class="section-head"><div><h2>Topic mastery</h2><p>Mastery is reached after at least 20 attempts with 80% accuracy.</p></div></div><div class="panel setting" id="masteryBreakdown"></div><div class="section-head"><div><h2>Achievements</h2></div></div><div class="badge-grid" id="achievementGrid"></div><div class="section-head"><div><h2>Topic breakdown</h2></div></div><div class="cards" id="breakdown"></div>
+ <div class="section-head"><div><h2>Topic mastery</h2><p>Mastery is reached after at least 20 attempts with 80% accuracy.</p></div></div><div class="panel setting" id="masteryBreakdown"></div>
+  <div class="section-head"><div><h2>🏆 Achievements</h2><p>Earn badges by practising, playing and exploring BYTE. New badges pop up as you unlock them.</p></div></div>
+  <div class="panel setting" style="margin-bottom:12px"><div class="metric-row"><div class="metric" style="min-width:160px"><strong id="achievementCount">0 / 0</strong><span>Badges unlocked</span></div><div style="flex:1;min-width:200px"><div class="mastery-row" style="grid-template-columns:1fr;margin-top:6px"><div class="mastery-track"><span id="achievementBar" style="width:0%"></span></div><span class="muted" style="text-align:right">Keep going to unlock the next badge!</span></div></div></div></div>
+  <div class="badge-grid" id="achievementGrid"></div>
+  <div class="section-head"><div><h2>Topic breakdown</h2></div></div><div class="cards" id="breakdown"></div>
 </section>
 
 <section class="view" id="exam">
- <div class="section-head"><div><div class="eyebrow">GCSE-style practice</div><h2>Exam mode</h2><p>20 mixed questions, 20 minutes. No hints or answer reveals until you submit.</p></div></div>
+ <div class="section-head"><div><div class="eyebrow">GCSE-style practice</div><h2>Exam mode</h2><p>Pick 10, 20 or 30 questions. You get about <b>1 minute per question</b>. No hints or answer reveals until you submit.</p></div></div>
  <div class="panel quiz-card" id="examSetup"><h3>Set up your mock exam</h3><div class="tool-controls" style="margin:14px 0"><label for="examLevel">Difficulty</label><select id="examLevel"><option value="0">Beginner · Year 7–8</option><option value="1" selected>Intermediate · Year 9–10</option><option value="2">Advanced · Year 11</option><option value="mix">Mixed levels</option></select><label for="examLength">Questions</label><select id="examLength"><option value="10">10 questions</option><option value="20" selected>20 questions</option><option value="30">30 questions</option></select></div><button class="btn primary" onclick="beginExam()">Start exam →</button></div>
  <div class="panel quiz-card" id="examRun" style="display:none"><div class="quiz-head"><div><div class="eyebrow">MOCK EXAM</div><h2 id="examCounter">Question 1</h2></div><span class="tag" id="examTimer">20:00</span></div><div class="question" id="examQuestion"></div><div id="examAnswers" class="answer-area"></div><div class="quiz-bottom"><span class="muted" id="examProgress">0 answered</span><button class="btn primary" onclick="nextExamQuestion()">Next →</button></div></div><div id="examResult"></div>
 </section>
@@ -214,12 +220,12 @@ for n in [2, 4, 6]:
  <article class="panel setting"><h3>Networks</h3><p><b>Download time</b> = file size (bits) ÷ connection speed (bits per second).</p><p>Remember to convert bytes to bits before using a speed measured in bits per second.</p></article>
  </div></section>
 <section class="view" id="saves">
- <div class="section-head"><div><div class="eyebrow">Take your progress with you</div><h2>Save / load</h2><p>Export a backup file or import one on another computer.</p></div></div>
+ <div class="section-head"><div><div class="eyebrow">Take your progress with you</div><h2>Save / load</h2><p>Export a backup file, import one, or sign in to keep progress on this device.</p></div></div>
  <div class="settings-grid">
-  <div class="panel setting"><div class="game-icon">⇩</div><h3>Export progress</h3><p>Download your progress as a <code>.bytesave</code> file. Keep it somewhere safe.</p><button class="btn primary" onclick="exportSave()">Export save file</button></div>
+  <div class="panel setting"><div class="game-icon">⇩</div><h3>Export progress</h3><p>Download your progress as an <b>encrypted</b> <code>.bytesave</code> file. Keep it somewhere safe.</p><button class="btn primary" onclick="exportSave()">Export save file</button></div>
   <div class="panel setting"><div class="game-icon">⇧</div><h3>Import progress</h3><p>Choose a previous <code>.bytesave</code> file to restore your progress in this browser.</p><input type="file" id="saveFile" accept=".bytesave,.json,application/json" style="width:100%;margin:8px 0"><button class="btn" onclick="importSave()">Import save file</button></div>
  </div>
- <div class="panel setting" style="margin-top:13px"><h3>About save files</h3><p>These files are currently plain JSON with a file extension. They are designed for portability, not encryption or anti-cheating. Anyone with the file can inspect or edit it. Do not put personal information in a save file.</p><button class="btn" onclick="resetProgress()">Reset all local progress</button></div>
+ <div class="panel setting" style="margin-top:13px"><h3>About save files</h3><p>Save files are encrypted and can only be opened by this app. Keep them private and only share your own.</p><button class="btn" onclick="resetProgress()">Reset all local progress</button></div>
 </section>
 
 <section class="view" id="settings">
